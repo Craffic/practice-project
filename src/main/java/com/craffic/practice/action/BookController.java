@@ -53,6 +53,7 @@ public class BookController {
      * Book和Auth这两个实体类都有name相同属性
      * 在controller上同时接收这两个实体的数据
      * 在传递参数中，两个相同的name会造成混淆，@ControllerAdvice和@InitBinder解决问题
+     * http://localhost:8080/practice/book_info?book.name=sanguoyanyi&book.auth=luo&auth.name=luoguanzhong&auth.age=33
      */
     @GetMapping("book_info")
     @ResponseBody
