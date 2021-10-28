@@ -2,11 +2,12 @@ package com.craffic.practice.action;
 
 import com.craffic.practice.domain.Book;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Controller
 public class BookController {
@@ -27,5 +28,21 @@ public class BookController {
         mv.addObject("books", books);
         mv.setViewName("books");
         return mv;
+    }
+
+    /**
+     * 获取ControllerAdvice全局数据
+     */
+    @GetMapping("query/global_data")
+    @ResponseBody
+    public void getGlobalData(Model model){
+        Map<String, Object> map = model.asMap();
+        Set<String> keySet = map.keySet();
+        Iterator<String> iterator = keySet.iterator();
+        while (iterator.hasNext()){
+            String key = iterator.next();
+            Object value = map.get(key);
+            System.out.println("全局数据：key=" + key + " value=" + value);
+        }
     }
 }
