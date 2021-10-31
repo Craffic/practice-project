@@ -1,4 +1,4 @@
-#1， 整合Thymeleaf
+#1. 整合Thymeleaf
 <ol>
     <li>添加以来</li>
     <li>配置thymeleaf</li>
@@ -7,3 +7,13 @@
     <li>创建books.html页面</li>
     
 </ol>
+
+
+----------------------------------------------------------------
+#1. springboot整合Druid+Mybatis
+###1.1 添加依赖
+###1.2 添加配置文件jdbc.properties、mybatis-config.xml、spring-context-druid.xml、spring-context-mybatis.xml
+###1.3 启动主类添加扫描mapper路径下的配置：@MapperScan("com.craffic.practice.dao")
+###1.4 application.properties配置Druid连接数据库的信息
+###1.5 application.properties配置Mybatis的mapper的location配置
+###1.6 编写controller、service、dao、mapper层
