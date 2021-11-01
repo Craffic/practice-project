@@ -18,8 +18,7 @@ public class UserController {
     @RequestMapping(value = "/detail", method = RequestMethod.GET)
     public String queryUserById(TbUserReq tbUser){
 
-        String userId = String.valueOf(tbUser.getUserId());
-        TbUserVo tbUSerDetail = userService.getTbUSerDetail(userId);
+        TbUserVo tbUSerDetail = userService.getTbUSerDetail(tbUser.getUserId());
         if (tbUSerDetail == null){
             return "请输入有效的用户ID！";
         }

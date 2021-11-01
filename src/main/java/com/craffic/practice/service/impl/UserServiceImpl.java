@@ -17,11 +17,8 @@ public class UserServiceImpl implements UserService {
         if (userId == null){
             return null;
         }
-
-        TbUserVo user = new TbUserVo();
-        if (Long.parseLong(userId) == 3L){
-            user = userDao.selectById(Long.parseLong(userId));
-        }
+        TbUserVo user = userDao.selectById(Long.parseLong(userId));
+        if (user == null) return null;
         return user;
     }
 
