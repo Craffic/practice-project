@@ -17,3 +17,11 @@
 ###1.4 application.properties配置Druid连接数据库的信息
 ###1.5 application.properties配置Mybatis的mapper的location配置
 ###1.6 编写controller、service、dao、mapper层
+
+
+# springboot整合redis
+### 1. 添加依赖
+### 2. 配置redis信息
+### 3. 创建实体类，并序列化对象
+### 4. 注入RedisTemplate和StringRedisTemplate模板
+### 5. 保存数据到redis里

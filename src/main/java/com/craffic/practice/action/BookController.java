@@ -2,6 +2,10 @@ package com.craffic.practice.action;
 
 import com.craffic.practice.domain.Auth;
 import com.craffic.practice.domain.Book;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,6 +17,15 @@ import java.util.*;
 
 @Controller
 public class BookController {
+
+    /**
+     * 注入redis模板
+     */
+    @Autowired
+    private RedisTemplate redisTemplate;
+    @Autowired
+    private StringRedisTemplate stringRedisTemplate;
+
     @GetMapping("/book_list")
     public ModelAndView books() {
         List<Book> books = new ArrayList();
@@ -61,4 +74,25 @@ public class BookController {
         return book.toString() + "-----------" + auth.toString();
     }
 
+    /**
+     * 整合redis案例
+     */
+    @GetMapping("redis_book")
+    @ResponseBody
+    public String test1(){
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+        ops.set("name", "三国演义");
+        String bookName = ops.get("name");
+        System.out.println(bookName);
+
+        ValueOperations ops1 = redisTemplate.opsForValue();
+        Book book = new Book();
+        book.setId(1);
+        book.setName("红楼梦");
+        book.setAuthor("曹雪芹");
+        ops1.set("book", book);
+        Book book1 = (Book)ops1.get("book");
+        System.out.println(book1.toString());
+        return "success";
+    }
 }
