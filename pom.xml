@@ -95,6 +95,12 @@
             <artifactId>commons-pool2</artifactId>
         </dependency>
         <!--redis end-->
+        <!--mongoDB start-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <!--mongo end-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-configuration-processor</artifactId>

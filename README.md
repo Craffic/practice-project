@@ -33,3 +33,11 @@
 ### 2. 配置redisCluster信息
 ### 3. 创建RedisConfig配置信息，返回redisTemplate和StringRedisTemplate实例
 ### 4. 应用和单体redis一致
+
+----------------------------------------------------------------
+# springboot整合MongoDB和MongoTemplate
+1. 添加依赖
+2. 配置MongoDB配置信息
+3. 编写BookDao实体类Dao
+4. 测试并在MongoDB中查看插入的数据
+5. 直接使用MongoTemplate操作MongoDB

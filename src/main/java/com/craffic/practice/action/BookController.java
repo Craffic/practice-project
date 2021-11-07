@@ -1,8 +1,10 @@
 package com.craffic.practice.action;
 
+import com.craffic.practice.dao.BookDao;
 import com.craffic.practice.domain.Auth;
 import com.craffic.practice.domain.Book;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
@@ -17,6 +19,11 @@ import java.util.*;
 
 @Controller
 public class BookController {
+
+    @Autowired
+    private BookDao bookDao;
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     /**
      * 注入redis模板
@@ -93,6 +100,56 @@ public class BookController {
         ops1.set("book", book);
         Book book1 = (Book)ops1.get("book");
         System.out.println(book1.toString());
+        return "success";
+    }
+
+    /**
+     * 整合MongoDB测试
+     */
+    @GetMapping("/mongo_test")
+    @ResponseBody
+    public String mongoTest(){
+        List<Book> bookList = new ArrayList<>();
+        Book b1 = new Book();
+        b1.setId(1);
+        b1.setName("朝花夕拾");
+        b1.setAuthor("鲁迅");
+        Book b2 = new Book();
+        b2.setId(5);
+        b2.setName("呐喊1");
+        b2.setAuthor("鲁迅1");
+        bookList.add(b1);
+        bookList.add(b2);
+        bookDao.insert(bookList);
+        List<Book> books_author = bookDao.findByAuthorContains("鲁迅");
+        System.out.println(books_author);
+        Book book_name = bookDao.findByNameEquals("朝花夕拾");
+        System.out.println(book_name);
+        return "success";
+    }
+
+    /**
+     * 整合Mongo Template测试
+     */
+    @GetMapping("/mongo_template")
+    @ResponseBody
+    public String mongoTemplate(){
+        List<Book> bookList = new ArrayList<>();
+        Book b1 = new Book();
+        b1.setId(11);
+        b1.setName("围城");
+        b1.setAuthor("钱钟书");
+        Book b2 = new Book();
+        b2.setId(12);
+        b2.setName("宋词精选");
+        b2.setAuthor("佚名");
+        bookList.add(b1);
+        bookList.add(b2);
+        mongoTemplate.insertAll(bookList);
+        List<Book> books_all = mongoTemplate.findAll(Book.class);
+        System.out.println(books_all);
+        Book book_id = mongoTemplate.findById(6, Book.class);
+        System.out.println(book_id);
         return "success";
     }
 }
