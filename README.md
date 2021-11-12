@@ -26,7 +26,6 @@
 ### 4. 注入RedisTemplate和StringRedisTemplate模板
 ### 5. 保存数据到redis里
 
-
 ----------------------------------------------------------------
 # springboot整合RedisCluster
 ### 1.  添加依赖
@@ -41,3 +40,11 @@
 3. 编写BookDao实体类Dao
 4. 测试并在MongoDB中查看插入的数据
 5. 直接使用MongoTemplate操作MongoDB
+
+----------------------------------------------------------------
+feature_20111111_1_redisCache
+# Redis单机缓存
+1. 添加依赖spring-boot-starter-cache和Redis依赖
+2. 在application.properties中加入cache的配置
+3. 在启动主类上添加@EnableCaching注解，开启缓存
+4. 测试两次查询之间有删除或者修改数据的情况

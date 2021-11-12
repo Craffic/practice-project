@@ -13,4 +13,17 @@
     <select id="selectById" resultType="com.craffic.practice.vo.TbUserVo">
       SELECT * FROM TB_USER T WHERE T.ID = #{id}
     </select>
+
+    <select id="deleteById" resultType="java.lang.Integer">
+      DELETE FROM TB_USER T WHERE T.ID = #{id}
+    </select>
+
+    <update id="updateUser" parameterType="com.craffic.practice.domain.TbUser">
+       UPDATE TB_USER T
+          SET T.USERNAME = #{userName},
+              T.PHONE    = #{phone},
+              T.EMAIL    = #{email},
+              T.UPDATED  = SYSDATE
+        WHERE T.ID = #{id}
+    </update>
 </mapper>
