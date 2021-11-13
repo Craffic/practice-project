@@ -136,11 +136,11 @@ public class BookController {
     public String mongoTemplate(){
         List<Book> bookList = new ArrayList<>();
         Book b1 = new Book();
-        b1.setId(11);
+        b1.setId(21);
         b1.setName("围城");
         b1.setAuthor("钱钟书");
         Book b2 = new Book();
-        b2.setId(12);
+        b2.setId(22);
         b2.setName("宋词精选");
         b2.setAuthor("佚名");
         bookList.add(b1);

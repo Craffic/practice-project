@@ -1,7 +1,6 @@
 package com.craffic.practice.pojo;
 
 import com.craffic.practice.common.BaseEntity;
-import com.craffic.practice.util.RegexpUtils;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
