@@ -19,5 +19,6 @@
 
     <modules>
         <module>boot_test</module>
+        <module>security_test</module>
     </modules>
 </project>
