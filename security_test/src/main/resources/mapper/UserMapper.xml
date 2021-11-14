@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.craffic.security.dao.UserMapper">
+
+    <select id="loadUserByUserName" resultType="com.craffic.security.domain.User">
+      SELECT * FROM USER U WHERE U.USER_NAME = #{userName}
+    </select>
+
+    <select id="getUserRolesByUid" resultType="com.craffic.security.domain.Role">
+      SELECT * FROM ROLE R, USER_ROLE UR WHERE R.ID = UR.RID AND UR.UID = #{id}
+    </select>
+</mapper>
