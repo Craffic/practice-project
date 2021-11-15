@@ -157,78 +157,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().
+                antMatchers("/db/**").hasRole("dba").
                 antMatchers("/admin/**").hasRole("admin").
                 antMatchers("/user/**").hasRole("user").
-                antMatchers("/db/**").hasRole("dba").
-                anyRequest().
-                authenticated().
-                and().
-                formLogin().loginProcessingUrl("/login").permitAll().
-                successHandler(new AuthenticationSuccessHandler() {
-                    @Override
-                    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException, ServletException {
-                        // Authentication参数是用来获取用户登录信息的
-                        Object principal = auth.getPrincipal();
-                        response.setContentType("application/json;charset=utf-8");
-                        PrintWriter out = response.getWriter();
-                        response.setStatus(200);
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("status", 200);
-                        map.put("msg", principal);
-                        ObjectMapper objMapper = new ObjectMapper();
-                        out.write(objMapper.writeValueAsString(map));
-                        out.flush();
-                        out.close();
-                    }
-                }).
-                failureHandler(new AuthenticationFailureHandler() {
-                    @Override
-                    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
-                        response.setContentType("application/json;charset=utf-8");
-                        PrintWriter out = response.getWriter();
-                        response.setStatus(401);
-                        Map<String, Object> map = new HashMap<>();
-                        map.put("status", "401");
-                        if (e instanceof LockedException){
-                            map.put("msg", "账户被锁定，登录失败！");
-                        } else if(e instanceof BadCredentialsException) {
-                            map.put("mag", "，用户名或密码错误，登录失败！");
-                        } else if (e instanceof DisabledException) {
-                            map.put("msg", "，账户被禁用，登录失败！");
-                        } else if (e instanceof AccountExpiredException) {
-                            map.put("msg", "，账户已过期，登录失败！");
-                        } else if (e instanceof CredentialsExpiredException) {
-                            map.put("msg", "，密码已过期，登录失败！");
-                        } else {
-                            map.put("msg", "登录失败！");
-                        }
-                        ObjectMapper objMapper = new ObjectMapper();
-                        out.write(objMapper.writeValueAsString(map));
-                        out.flush();
-                        out.close();
-                    }
-                }).
-                // 表示和登录相关的接口都不需要验证
-                permitAll()
-                // 开启注销登录的配置
-                .and().logout()
-                // 配置注销登录请求url为“/logout”，默认也是/logout，清除认证信息，使session失效
-                .logoutUrl("/logout").clearAuthentication(true).invalidateHttpSession(true)
-                // 可以在logoutHandler中完成一些数据清理工作，比如说cookie的清除
-                .addLogoutHandler(new LogoutHandler() {
-                    @Override
-                    public void logout(HttpServletRequest request, HttpServletResponse response, Authentication auth) {
-
-                    }
-                })
-                // 处理注销成功后的业务逻辑，如返回一段json或者跳转回登录页面
-                .logoutSuccessHandler(new LogoutSuccessHandler() {
-                    @Override
-                    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException, ServletException {
-                        response.sendRedirect("/login_page");
-                    }
-                })
-                .and().
-                csrf().disable();
+                anyRequest().authenticated().
+                and().formLogin().permitAll().
+                and().csrf().disable();
     }
 }
