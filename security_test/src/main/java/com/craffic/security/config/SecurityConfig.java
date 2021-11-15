@@ -4,6 +4,8 @@ import com.craffic.security.service.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchy;
+import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.authentication.*;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -52,6 +54,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                .and()
 //                .withUser("Craffic").password("123").roles("USER");
         auth.userDetailsService(userService);
+    }
+
+    /**
+     * 角色继承
+     * user：是一个公共角色
+     * admin：具有admin、user角色
+     * root：具有root、admin、user角色
+     * 角色继承关系：admin继承user，root继承admin
+     * 表达式：ROLE_dba > ROLE_admin     ROLE_admin > ROLE_user
+     */
+    @Bean
+    RoleHierarchy roleHierarchy(){
+        RoleHierarchyImpl roleHierarchy = new RoleHierarchyImpl();
+        String hierarchy = "ROLE_dba > ROLE_admin ROLE_admin > ROLE_user";
+        roleHierarchy.setHierarchy(hierarchy);
+        return roleHierarchy;
     }
 
 //    /**
