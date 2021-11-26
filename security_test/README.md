@@ -24,3 +24,11 @@
    2. 设置登录接口
    3. 设置登录成功回调方法和登录失败回调方法，并返回json信息
    4. 测试：POST http://localhost:8081/login?userName=admin&passwd=1234
+
+
+### 动态权限配置
+1. 增加资源表和资源-角色表
+2. 自定义FilterInvocationSecurityMetadataSource
+3. 自定义AccessDecisionManager
+4. dao层和Mapper层
+5. SecurityConfig配置

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.craffic.security.dao.MenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.craffic.security.domain.Menu">
+        <id property="id" column="id"></id>
+        <result property="pattern" column="pattern"></result>
+        <collection property="roleList" ofType="com.craffic.security.domain.Role">
+            <id column="rid" property="id"></id>
+            <result column="rname" property="name"></result>
+            <result column="rnameZh" property="nameZh"></result>
+        </collection>
+    </resultMap>
+
+    <select id="getAllMenus" resultMap="BaseResultMap">
+      SELECT M.*, R.ID AS RID, R.NAME AS RNAME, R.NAME_ZH AS RNAMEZH
+       FROM MENU M LEFT JOIN MENU_ROLE MR ON M.ID = MR.MID LEFT JOIN ROLE R ON R.ID = MR.RID
+    </select>
+</mapper>

@@ -5,6 +5,15 @@ public class Role {
 
     private String name;
 
+    @Override
+    public String toString() {
+        return "Role{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", nameZh='" + nameZh + '\'' +
+                '}';
+    }
+
     private String nameZh;
 
     public Integer getId() {

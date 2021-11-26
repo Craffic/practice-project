@@ -12,7 +12,7 @@ import java.util.List;
 public class User implements UserDetails {
     private Integer id;
 
-    private String UserName;
+    private String username;
 
     private String password;
 
@@ -50,7 +50,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return UserName;
+        return username;
     }
 
     @Override
@@ -83,11 +83,11 @@ public class User implements UserDetails {
     }
 
     public String getUserName() {
-        return UserName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        UserName = userName;
+        username = userName;
     }
 
     public void setPassword(String password) {

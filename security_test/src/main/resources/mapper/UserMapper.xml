@@ -3,7 +3,7 @@
 <mapper namespace="com.craffic.security.dao.UserMapper">
 
     <select id="loadUserByUserName" resultType="com.craffic.security.domain.User">
-      SELECT * FROM USER U WHERE U.USER_NAME = #{userName}
+      SELECT * FROM USER U WHERE U.USERNAME = #{userName}
     </select>
 
     <select id="getUserRolesByUid" resultType="com.craffic.security.domain.Role">
