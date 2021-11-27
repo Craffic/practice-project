@@ -32,3 +32,18 @@
 3. 自定义AccessDecisionManager
 4. dao层和Mapper层
 5. SecurityConfig配置
+
+
+### oauth
+基于security分支
+1. 添加依赖
+2. 配置Redis信息
+3. 配置授权服务器
+4. 配置资源服务器
+5. 配置securityConfig
+6. 添加controller
+7. 获取token
+8. 拿着token访问资源接口
+9. 刷新token
+
+
