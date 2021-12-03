@@ -1,0 +1,14 @@
+### springboot整合websocket广播消息功能
+1. 添加依赖
+2. 配置WebsocketConfig:
+    2.1 实现WebSocketMessageBrokerConfigurer接口
+    2.2 重写registerStompEndpoints()，设置和前端连接的端点(endPoint)，前缀为/chat
+    2.3 重写configureMessageBroker，设置消息代理的前缀/topic，和接收客户端消息的前缀/app
+3. 添加controller
+    3.1 设置MessageMapping注解
+    3.2 设置SendTo注解
+4. 编写前端聊天页面
+5. 测试
+6. todo
+    6.1 第二种方法实现websocket广播消息
+    6.2 用定时器实现服务器定时向客户端发送消息

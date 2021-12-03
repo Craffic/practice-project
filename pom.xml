@@ -21,5 +21,6 @@
         <module>boot_test</module>
         <module>security_test</module>
         <module>oauth_test</module>
+        <module>websocket_test</module>
     </modules>
 </project>
