@@ -22,5 +22,6 @@
         <module>security_test</module>
         <module>oauth_test</module>
         <module>websocket_test</module>
+        <module>jms_test</module>
     </modules>
 </project>
