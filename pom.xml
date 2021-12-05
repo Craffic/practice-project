@@ -23,5 +23,6 @@
         <module>oauth_test</module>
         <module>websocket_test</module>
         <module>mail_test</module>
+        <module>job_test</module>
     </modules>
 </project>
