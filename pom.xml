@@ -24,5 +24,6 @@
         <module>websocket_test</module>
         <module>mail_test</module>
         <module>job_test</module>
+        <module>springbatch_test</module>
     </modules>
 </project>
